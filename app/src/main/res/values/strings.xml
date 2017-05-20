@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">Notes</string>
-    <string name="new_note">New note</string>
+    <string name="app_name">Kotlin Notes</string>
+    <string name="new_note">New note…</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="alert_success_save">New note created!</string>
+    <string name="alert_success_update">Note updated!</string>
+    <string name="tap_here_to_write">tap here to write…</string>
 </resources>

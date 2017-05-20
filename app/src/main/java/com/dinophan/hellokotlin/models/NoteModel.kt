@@ -8,6 +8,7 @@ open class NoteModel constructor() {
 
     private var id  : Int       = -1
     private var body: String    = ""
+    private var data: String    = ""
 
     /**
      * create existing note with id
@@ -15,6 +16,7 @@ open class NoteModel constructor() {
     constructor(id: Int, body: String): this() {
         this.id     = id
         this.body   = body
+        this.data   = this.body + "~" + this.id
     }
 
     /**
@@ -24,6 +26,7 @@ open class NoteModel constructor() {
     constructor(noteData: String): this() {
         val parseResult: List<String> = noteData.split("~")
         assert(parseResult.isNotEmpty())
+        this.data   = noteData
         this.id     = Integer.parseInt(parseResult.last())
         this.body   = noteData.substring(0, noteData.length - (parseResult.last().length + 1))
     }
@@ -58,6 +61,11 @@ open class NoteModel constructor() {
         assert(newBody != null && !(newBody as String).isEmpty())
         this.body = newBody!!
         return this
+    }
+
+    open fun getData(): String? {
+        if (this.data.isEmpty()) return null
+        return this.data
     }
 
 }

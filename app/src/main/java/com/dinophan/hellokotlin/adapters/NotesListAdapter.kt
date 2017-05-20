@@ -36,18 +36,18 @@ open class NotesListAdapter(notesList: ArrayList<NoteModel>, callback: NotesList
     class NoteViewHolder(itemView: View, callback: NotesListAdapterBehavior) : RecyclerView.ViewHolder(itemView) {
 
         private val noteTitleTextView: TextView? = itemView.findViewById(R.id.list_item_note_title_textview) as TextView?
-        private var model: NoteModel    = NoteModel()
+        private var modelBinder: NoteModel = NoteModel()
         private var pos: Int            = 0
 
-        fun setAttribute(model: NoteModel, position: Int) {
-            this.model  = model
+        fun setAttribute(modelBinder: NoteModel, position: Int) {
+            this.modelBinder = modelBinder
             this.pos    = position
-            this.noteTitleTextView?.text = model.getBody()
+            this.noteTitleTextView?.text = modelBinder.getBody()
             itemView.setOnClickListener(this.viewOnClick)
         }
 
         private val viewOnClick = View.OnClickListener {
-            callback.onNoteItemClickListener(this.model, this.pos)
+            callback.onNoteItemClickListener(this.modelBinder, this.pos)
         }
     }
 

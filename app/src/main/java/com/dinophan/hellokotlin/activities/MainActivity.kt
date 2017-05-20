@@ -1,5 +1,6 @@
 package com.dinophan.hellokotlin.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -20,6 +21,11 @@ class MainActivity : BaseActivity(), NotesListAdapter.NotesListAdapterBehavior {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        this.reloadNotesList()
+    }
+
     override fun onLoadControls() {
         super.onLoadControls()
         val notesRecyclerView           = (this.findViewById(R.id.main_notes_recyclerview) as RecyclerView)
@@ -29,7 +35,6 @@ class MainActivity : BaseActivity(), NotesListAdapter.NotesListAdapterBehavior {
 
     override fun onLoadSettings() {
         super.onLoadSettings()
-        this.reloadNotesList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -39,14 +44,21 @@ class MainActivity : BaseActivity(), NotesListAdapter.NotesListAdapterBehavior {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.main_menu_new_note) {
-            NoteService.getInstance(this).addNote("Hello World!")
-            this.reloadNotesList()
+            this.startWriting(null)
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onNoteItemClickListener(item: NoteModel, position: Int) {
+        this.startWriting(item)
+    }
 
+    private fun startWriting(noteModel: NoteModel?) {
+        val writeIntent = Intent(this, WriteActivity::class.java)
+        if (noteModel != null && (noteModel as NoteModel).getData() != null) {
+            writeIntent.putExtra(WriteActivity.Intent.EXTRA_STRING_NOTEDATA, noteModel.getData())
+        }
+        this.startActivity(writeIntent)
     }
 
     private fun reloadNotesList() {

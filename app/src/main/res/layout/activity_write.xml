@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dinophan.hellokotlin.activities.WriteActivity">
+    <ScrollView
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/write_note_body_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tap_here_to_write"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
